@@ -28,7 +28,7 @@ const AddProduct = () => {
     formData.append("product", image); // Append the image file
 
     // Upload image first
-    await fetch("http://localhost:4000/upload", {
+    await fetch("https://glamgait-ecommerce-api.vercel.app/upload", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -46,7 +46,7 @@ const AddProduct = () => {
       product.image = responseData.image_url;
 
       // Send product details to add to the database
-      await fetch("http://localhost:4000/addproduct", {
+      await fetch("https://glamgait-ecommerce-api.vercel.app/addproduct", {
         method: "POST",
         headers: {
           Accept: "application/json",
