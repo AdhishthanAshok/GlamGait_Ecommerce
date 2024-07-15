@@ -8,9 +8,20 @@ const path = require("path");
 const cors = require("cors");
 require("dotenv").config();
 
+const allowedOrigins = [
+  "https://glamgait-shopping.vercel.app", // Production URL
+  "http://localhost:5173", // Localhost URL
+];
+
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: (origin, callback) => {
+      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+        callback(null, true); // Allow request
+      } else {
+        callback(new Error("Not allowed by CORS")); // Block request
+      }
+    },
     methods: ["POST", "GET"],
     credentials: true,
   })
@@ -46,7 +57,7 @@ app.use("/images", express.static("upload/images"));
 app.post("/upload", upload.single("product"), (req, res) => {
   res.json({
     success: 1,
-    image_url: `http://localhost:${port}/images/${req.file.filename}`,
+    image_url: `https://glamgait-ecommerce-api.vercel.app/images/${req.file.filename}`,
   });
 });
 
