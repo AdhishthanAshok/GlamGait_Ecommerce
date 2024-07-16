@@ -229,9 +229,9 @@ app.post("/login", async (req, res) => {
 });
 
 const port = 4000;
-app.listen(port, (error) => {
+app.listen(4000, (error) => {
   if (!error) {
-    console.log("Server Running on Port " + port);
+    console.log(`Server Running on Port ${port}`);
   } else {
     console.log("Error " + error);
   }
