@@ -27,7 +27,7 @@ require("dotenv").config();
 // );
 app.use(
   cors({
-    origin: "",
+    origin: "https://glamgait-shopping.vercel.app",
     methods: ["POST", "GET"],
     credentials: true,
   })
@@ -43,7 +43,7 @@ app.get("/", (req, res) => {
   res.send("Express App is Running");
 });
 
-// Image Stoage Engine
+// Image Storage Engine
 
 const storage = multer.diskStorage({
   destination: "./upload/images",
