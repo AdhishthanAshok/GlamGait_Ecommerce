@@ -25,14 +25,12 @@ const app = express();
 //     credentials: true,
 //   })
 // );
-app.use(
-  cors({
-    origin: "https://glamgait-shopping.vercel.app",
-    methods: ["POST", "GET"],
-    credentials: true,
-  })
-);
-
+app.use(cors());
+// {
+//   origin: "*",
+//   methods: ["POST", "GET"],
+//   credentials: true,
+// }
 app.use(express.json());
 // Database Connection with MongoDB
 mongoose.connect(`${process.env.MONGODB_URI}/${process.env.DB_NAME}`);
