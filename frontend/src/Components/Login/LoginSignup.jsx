@@ -17,7 +17,7 @@ const LoginSignup = () => {
   const login = async () => {
     console.log("Login FUnction Executed", formData);
     let responseData;
-    await fetch("https://glamgait-ecommerce-api.vercel.app/login", {
+    await fetch("https://glamgait-ecommerce-backend.vercel.app/login", {
       method: "POST",
       headers: {
         Accept: "application/form-data",
@@ -38,7 +38,7 @@ const LoginSignup = () => {
   const signup = async () => {
     console.log("Signup FUnction Executed", formData);
     let responseData;
-    await fetch("https://glamgait-ecommerce-api.vercel.app/signup", {
+    await fetch("https://glamgait-ecommerce-backend.vercel.app/signup", {
       method: "POST",
       headers: {
         Accept: "application/form-data",

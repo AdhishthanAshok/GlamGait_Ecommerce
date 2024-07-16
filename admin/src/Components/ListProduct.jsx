@@ -8,7 +8,7 @@ const ListProduct = () => {
   const [allProducts, setAllProducts] = useState([]);
 
   const fetchInfo = async () => {
-    await fetch("https://glamgait-ecommerce-api.vercel.app/allproducts")
+    await fetch("https://glamgait-ecommerce-backend.vercel.app/allproducts")
       .then((res) => res.json())
       .then((data) => {
         setAllProducts(data);
@@ -36,7 +36,7 @@ const ListProduct = () => {
   };
 
   const removeProduct = async (id) => {
-    await fetch("https://glamgait-ecommerce-api.vercel.app/removeproduct", {
+    await fetch("https://glamgait-ecommerce-backend.vercel.app/removeproduct", {
       method: "POST",
       headers: {
         Accept: "application/json",
