@@ -10,8 +10,14 @@ const cors = require("cors");
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 
+app.use(
+  cors({
+    origin: ["https://glamgait-admin.vercel.app/"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
 app.use(express.json());
-app.use(cors());
 
 // Database Connection with MongoDB
 mongoose.connect(`${process.env.MONGODB_URI}/${process.env.DB_NAME}`);
