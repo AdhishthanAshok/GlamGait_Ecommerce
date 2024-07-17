@@ -81,9 +81,7 @@ const ListProduct = () => {
             {allProducts.map((product, index) => (
               <tr key={index} className="text-center">
                 <td className="py-2 px-4 border-b">
-                  <Link
-                    to={`https://glamgait-shopping.vercel.app/product/${product.id}`}
-                  >
+                  <Link to={`/product/${product.id}`}>
                     <img
                       className="mx-auto h-12 w-12 object-cover"
                       src={product.image}
