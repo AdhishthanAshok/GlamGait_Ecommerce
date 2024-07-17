@@ -22,17 +22,20 @@ const AddProduct = () => {
 
   const Add_Product = async () => {
     let responseData;
-    const product = { ...productDetails, image: "" }; // Initialize image as empty
+    const product = { ...productDetails, image }; // Initialize image as empty
 
     const formData = new FormData();
     formData.append("product", image); // Append the image file
 
     try {
       // Upload image first
-      const uploadResponse = await fetch("http://localhost:4000/upload", {
-        method: "POST",
-        body: formData,
-      });
+      const uploadResponse = await fetch(
+        `https://glamgait-ecommerce-backend.vercel.app/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (!uploadResponse.ok) {
         throw new Error("Failed to upload image");
@@ -46,7 +49,7 @@ const AddProduct = () => {
 
         // Send product details to add to the database
         const addProductResponse = await fetch(
-          "http://localhost:4000/addproduct",
+          `https://glamgait-ecommerce-backend.vercel.app/addproduct`,
           {
             method: "POST",
             headers: {
