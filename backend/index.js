@@ -1,39 +1,26 @@
+const port = 4000;
 const express = require("express");
+const app = express();
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const path = require("path");
 const cors = require("cors");
+const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 
-const app = express();
-// const allowedOrigins = [
-//   "https://glamgait-shopping.vercel.app", // Production URL
-//   "http://localhost:5173", // Localhost URL
-// ];
-
-// app.use(
-//   cors({
-//     origin: (origin, callback) => {
-//       if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-//         callback(null, true); // Allow request
-//       } else {
-//         callback(new Error("Not allowed by CORS")); // Block request
-//       }
-//     },
-//     methods: ["POST", "GET"],
-//     credentials: true,
-//   })
-// );
-app.use(cors());
-// {
-//   origin: "*",
-//   methods: ["POST", "GET"],
-//   credentials: true,
-// }
 app.use(express.json());
+app.use(cors());
+
 // Database Connection with MongoDB
 mongoose.connect(`${process.env.MONGODB_URI}/${process.env.DB_NAME}`);
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 // API creation
 
@@ -41,28 +28,34 @@ app.get("/", (req, res) => {
   res.send("Express App is Running");
 });
 
-// Image Storage Engine
+// Image Stoage Engine
 
-const storage = multer.diskStorage({
-  destination: "./upload/images",
-  filename: (req, file, cb) => {
-    return cb(
-      null,
-      `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`
-    );
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "product_images",
+    public_id: (req, file) => `${file.fieldname}_${Date.now()}`,
   },
 });
 
 const upload = multer({ storage: storage });
 
 // Creating upload Endpoint for images
-app.use("/images", express.static("upload/images"));
+// app.use("/images", express.static("upload/images"));
 
 app.post("/upload", upload.single("product"), (req, res) => {
-  res.json({
-    success: 1,
-    image_url: `https://glamgait-ecommerce-backend.vercel.app/images/${req.file.filename}`,
-  });
+  try {
+    res.json({
+      success: 1,
+      image_url: req.file.path, // The Cloudinary URL will be here
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: 0,
+      message: "Image upload failed",
+      error: error.message,
+    });
+  }
 });
 
 // Schema for Creating products
@@ -226,10 +219,9 @@ app.post("/login", async (req, res) => {
   }
 });
 
-const port = 4000;
-app.listen(4000, (error) => {
+app.listen(port, (error) => {
   if (!error) {
-    console.log(`Server Running on Port ${port}`);
+    console.log("Server Running on Port " + port);
   } else {
     console.log("Error " + error);
   }

@@ -22,50 +22,57 @@ const AddProduct = () => {
 
   const Add_Product = async () => {
     let responseData;
-    let product = productDetails;
+    const product = { ...productDetails, image: "" }; // Initialize image as empty
 
     const formData = new FormData();
     formData.append("product", image); // Append the image file
 
-    // Upload image first
-    await fetch("http://localhost:4000/upload", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-      },
-      body: formData,
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        responseData = data;
+    try {
+      // Upload image first
+      const uploadResponse = await fetch("http://localhost:4000/upload", {
+        method: "POST",
+        body: formData,
       });
 
-    // If image upload is successful
-    if (responseData.success) {
-      // Update productDetails with the image URL
-      product.image = responseData.image_url;
+      if (!uploadResponse.ok) {
+        throw new Error("Failed to upload image");
+      }
 
-      // Send product details to add to the database
-      await fetch("http://localhost:4000/addproduct", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(product),
-      })
-        .then((resp) => resp.json())
-        .then((data) => {
-          if (data.success) {
-            toast.success("Product Added Successfully!");
-          } else {
-            toast.error("Failed to add product.");
+      responseData = await uploadResponse.json();
+
+      // If image upload is successful
+      if (responseData.success) {
+        product.image = responseData.image_url; // Update product with image URL
+
+        // Send product details to add to the database
+        const addProductResponse = await fetch(
+          "http://localhost:4000/addproduct",
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(product),
           }
-        });
-    } else {
-      toast.error("Image upload failed.");
+        );
+
+        const addProductData = await addProductResponse.json();
+
+        if (addProductData.success) {
+          toast.success("Product Added Successfully!");
+        } else {
+          toast.error("Failed to add product.");
+        }
+      } else {
+        toast.error("Image upload failed.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("An error occurred while adding the product.");
     }
   };
+
   return (
     <div className="flex flex-col pt-5 items-center gap-6 dark:bg-gray-800 w-full h-screen px-4">
       <ToastContainer />
