@@ -12,7 +12,10 @@ require("dotenv").config();
 
 app.use(
   cors({
-    origin: ["https://glamgait-admin.vercel.app/"],
+    origin: [
+      "https://glamgait-admin.vercel.app",
+      "https://glamgait-shopping.vercel.app",
+    ],
     methods: ["POST", "GET"],
     credentials: true,
   })
