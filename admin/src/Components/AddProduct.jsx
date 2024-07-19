@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ClipLoader } from "react-spinners";
 
 const AddProduct = () => {
   const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false); // New loading state
+
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
   };
@@ -21,6 +24,7 @@ const AddProduct = () => {
   };
 
   const Add_Product = async () => {
+    setLoading(true); // Set loading to true
     let responseData;
     const product = { ...productDetails, image }; // Initialize image as empty
 
@@ -73,6 +77,8 @@ const AddProduct = () => {
     } catch (error) {
       console.error("Error:", error);
       toast.error("An error occurred while adding the product.");
+    } finally {
+      setLoading(false); // Set loading to false
     }
   };
 
@@ -165,9 +171,9 @@ const AddProduct = () => {
         <button
           onClick={Add_Product}
           type="button"
-          className="text-white bg-green-500 hover:bg-green-600 focus:ring-1 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700"
+          className="text-white bg-green-500 hover:bg-green-600 focus:ring-1 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 flex justify-center items-center"
         >
-          Add Product
+          {loading ? <ClipLoader size={20} color="#fff" /> : "Add Product"}
         </button>
       </div>
     </div>
