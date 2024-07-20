@@ -10,7 +10,9 @@ const Product = () => {
 
   const fetchProduct = async () => {
     try {
-      const response = await fetch(`http://localhost:4000/allproducts`);
+      const response = await fetch(
+        `https://glamgait-ecommerce-backend.vercel.app/allproducts`
+      );
       const data = await response.json();
       const foundProduct = data.find((item) => item.id === Number(productId));
       setProduct(foundProduct);
