@@ -131,30 +131,6 @@ export default function Navbar() {
                       Login
                     </Link>
                   )}
-
-                  {/* {isLoggedIn ? (
-                    <>
-                      <Link
-                        to="/profile"
-                        className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-50"
-                      >
-                        Your Profile
-                      </Link>
-                      <Link
-                        to="/logout"
-                        className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-50"
-                      >
-                        Sign out
-                      </Link>
-                    </>
-                  ) : (
-                    <Link
-                      to="/login"
-                      className="block px-4 hover:text-blue-500 active:text-blue-950 dark:hover:text-blue-500 dark:active:text-blue-400 py-2 text-sm text-gray-700 dark:text-gray-50"
-                    >
-                      Login
-                    </Link>
-                  )} */}
                 </div>
               )}
             </div>
