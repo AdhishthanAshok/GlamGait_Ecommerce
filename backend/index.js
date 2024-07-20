@@ -184,7 +184,7 @@ app.post("/signup", async (req, res) => {
     });
   }
   let cart = {};
-  for (let i = 0; i < 300; i++) {
+  for (let i = 0; i < 100; i++) {
     cart[i] = 0;
   }
 
@@ -288,6 +288,14 @@ app.post("/removeentireitem", fetchUser, async (req, res) => {
     { cartData: userData.cartData }
   );
   res.send("Item removed entirely");
+});
+
+// creating endpoint to get cart data of the user
+
+app.post("/getcart", fetchUser, async (req, res) => {
+  console.log("Get Cart");
+  let userData = await Users.findOne({ _id: req.user.id });
+  res.json(userData.cartData);
 });
 
 app.listen(port, (error) => {

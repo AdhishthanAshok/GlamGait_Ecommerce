@@ -12,6 +12,20 @@ const ShopContextProvider = (props) => {
       const data = await response.json();
       setAllProducts(data);
       setCartItems(getDefaultCart(data.length)); // Initialize cart based on number of products
+
+      if (localStorage.getItem("auth-token")) {
+        fetch("http://localhost:4000/getcart", {
+          method: "POST",
+          headers: {
+            Accept: "application/form-data",
+            "auth-token": `${localStorage.getItem("auth-token")}`,
+            "Content-Type": "application/json",
+          },
+          body: "",
+        })
+          .then((response) => response.json())
+          .then((data) => setCartItems(data));
+      }
     } catch (error) {
       console.error("Error fetching products:", error);
     }
