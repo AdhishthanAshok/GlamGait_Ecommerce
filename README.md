@@ -104,9 +104,9 @@ Welcome to GlamGait_Ecommerce! This project is a modern and responsive ecommerce
 
 ## Usage
 
-1. Access the application frontend at `https://glamgait-shopping.vercel.app`
-2. Access the admin panel at `https://glamgait-admin.vercel.app`
-3. Use the backend API at `https://glamgait-ecommerce-backend.vercel.app`
+1. Access the application frontend at `http://localhost:5173`
+2. Access the admin panel at `http://localhost:5174`
+3. Use the backend API at `http://localhost:4000`
 
 ## Links
 
