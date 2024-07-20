@@ -10,7 +10,6 @@ const cloudinary = require("cloudinary").v2;
 const cors = require("cors");
 require("dotenv").config();
 
-app.use(cors());
 app.use(
   cors({
     origin: [
