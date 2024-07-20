@@ -91,10 +91,10 @@ const ListProduct = () => {
                 </td>
                 <td className="py-2 px-4 border-b">{product.name}</td>
                 <td className="py-2 px-4 border-b text-red-500  line-through">
-                  ${product.old_price}
+                  ₹{product.old_price}
                 </td>
                 <td className="py-2 px-4 border-b text-green-600">
-                  ${product.new_price}
+                  ₹{product.new_price}
                 </td>
                 <td className="py-2 px-4 border-b uppercase">
                   {product.category}

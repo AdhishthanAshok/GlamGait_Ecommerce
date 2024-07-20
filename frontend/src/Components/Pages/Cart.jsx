@@ -5,7 +5,7 @@ import emptyCart from "../assets/emptyCart.png";
 
 const Cart = () => {
   const {
-    data_product,
+    allProducts, // Use allProducts instead of data_product
     cartItems,
     removeFromCart,
     addToCart,
@@ -37,7 +37,7 @@ const Cart = () => {
           <div className="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
             <div className="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
               <div className="space-y-6">
-                {data_product.map((product) => {
+                {allProducts.map((product) => {
                   if (cartItems[product.id] > 0) {
                     return (
                       <div
@@ -50,12 +50,7 @@ const Cart = () => {
                             className="shrink-0 md:order-1"
                           >
                             <img
-                              className="h-auto w-20 dark:hidden"
-                              src={product.image}
-                              alt={product.name}
-                            />
-                            <img
-                              className="hidden h-auto w-20 dark:block"
+                              className="h-auto w-20 hover:scale-110 "
                               src={product.image}
                               alt={product.name}
                             />
@@ -68,10 +63,11 @@ const Cart = () => {
                             <div className="flex items-center">
                               <button
                                 type="button"
-                                id="decrement-button"
-                                data-input-counter-decrement="counter-input"
                                 className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
-                                onClick={() => removeFromCart(product.id)}
+                                onClick={() => {
+                                  console.log(product.id);
+                                  removeFromCart(product.id);
+                                }}
                               >
                                 <svg
                                   className="h-2.5 w-2.5 text-gray-900 dark:text-white"
@@ -91,21 +87,14 @@ const Cart = () => {
                               </button>
                               <input
                                 type="text"
-                                id="counter-input"
-                                data-input-counter
                                 className="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 dark:text-white"
-                                placeholder=""
                                 value={cartItems[product.id]}
                                 readOnly
                               />
                               <button
                                 type="button"
-                                id="increment-button"
-                                data-input-counter-increment="counter-input"
                                 className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
-                                onClick={() => {
-                                  addToCart(product.id);
-                                }}
+                                onClick={() => addToCart(product.id)}
                               >
                                 <svg
                                   className="h-2.5 w-2.5 text-gray-900 dark:text-white"
@@ -132,18 +121,21 @@ const Cart = () => {
                           </div>
 
                           <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                            <a
-                              href="#"
+                            <Link
+                              to={`/product/${product.id}`}
                               className="text-base font-medium text-gray-900 hover:underline dark:text-white"
                             >
                               {product.name}
-                            </a>
+                            </Link>
 
                             <div className="flex items-center gap-4">
                               <button
                                 type="button"
                                 className="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500"
-                                onClick={() => removeEntireItem(product.id)}
+                                onClick={() => {
+                                  console.log(product.id);
+                                  removeEntireItem(product.id);
+                                }}
                               >
                                 <svg
                                   className="me-1.5 h-5 w-5"
@@ -241,17 +233,16 @@ const Cart = () => {
                   </dl>
                 </div>
 
-                <a
-                  href="#"
+                <Link
+                  to="/checkout"
                   className="text-gray-50 dark:text-gray-50 mt-4 sm:mt-0 bg-green-500 hover:bg-green-600 font-medium rounded-lg text-sm px-5 py-2.5 flex items-center justify-center"
                 >
                   Proceed to Checkout
-                </a>
+                </Link>
 
                 <div className="flex items-center justify-center gap-2">
                   <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-                    {" "}
-                    or{" "}
+                    or
                   </span>
                   <Link
                     to="/"

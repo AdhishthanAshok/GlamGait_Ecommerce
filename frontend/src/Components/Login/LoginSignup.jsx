@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginSignup = () => {
   const [state, setState] = useState("Login");
@@ -17,7 +19,7 @@ const LoginSignup = () => {
   const login = async () => {
     console.log("Login FUnction Executed", formData);
     let responseData;
-    await fetch("https://glamgait-ecommerce-backend.vercel.app/login", {
+    await fetch("http://localhost:4000/login", {
       method: "POST",
       headers: {
         Accept: "application/form-data",
@@ -29,16 +31,23 @@ const LoginSignup = () => {
       .then((data) => (responseData = data));
 
     if (responseData.success) {
+      toast.success("Login Successfully!");
       localStorage.setItem("auth-token", responseData.token);
-      window.location.replace("/");
+      setTimeout(() => {
+        window.location.replace("/");
+      }, 1000);
     } else {
-      alert(responseData.errors);
+      if (Array.isArray(responseData.errors)) {
+        responseData.errors.forEach((error) => toast.error(error));
+      } else {
+        toast.error(responseData.errors);
+      }
     }
   };
   const signup = async () => {
-    console.log("Signup FUnction Executed", formData);
+    console.log("Signup Function Executed", formData);
     let responseData;
-    await fetch("https://glamgait-ecommerce-backend.vercel.app/signup", {
+    await fetch("http://localhost:4000/signup", {
       method: "POST",
       headers: {
         Accept: "application/form-data",
@@ -50,15 +59,23 @@ const LoginSignup = () => {
       .then((data) => (responseData = data));
 
     if (responseData.success) {
+      toast.success("Sign up Successfully!");
       localStorage.setItem("auth-token", responseData.token);
-      window.location.replace("/");
+      setTimeout(() => {
+        window.location.replace("/");
+      }, 1000);
     } else {
-      alert(responseData.errors);
+      if (Array.isArray(responseData.errors)) {
+        responseData.errors.forEach((error) => toast.error(error));
+      } else {
+        toast.error(responseData.errors);
+      }
     }
   };
 
   return (
     <div className="bg-gray-50 dark:bg-gray-900">
+      <ToastContainer />
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">

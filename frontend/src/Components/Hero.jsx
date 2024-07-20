@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
-    <Link to={`/product/61`}>
+    <Link to={`/product/1`}>
       <div className=" height: calc(100vh - 60px);  ">
         {/* Show Banner_img for tablet (md), laptop (lg), and monitor (xl) */}
         <div className=" items-center justify-center mx-auto hidden md:block w-11/12">

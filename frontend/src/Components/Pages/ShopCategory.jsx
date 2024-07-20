@@ -1,26 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Item from "../Item/Item.jsx";
-import data_product from "../assets/data.js";
 
 const ShopCategory = ({ category }) => {
-  let products = [];
-
-  switch (category) {
-    case "women":
-      products = data_product.filter((product) => product.category === "Women");
-      break;
-    case "men":
-      products = data_product.filter((product) => product.category === "Men");
-      break;
-    case "kids":
-      products = data_product.filter((product) => product.category === "Kids");
-      break;
-    default:
-      // Handle default case or error
-      break;
-  }
-
+  const [products, setProducts] = useState([]);
   const [visible, setVisible] = useState(8);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/allproducts");
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  // Filter products based on category
+  const filteredProducts = products.filter(
+    (product) => product.category.toLowerCase() === category.toLowerCase()
+  );
 
   const loadMore = () => {
     setVisible((prevCount) => prevCount + 4);
@@ -37,9 +39,9 @@ const ShopCategory = ({ category }) => {
           Popular in {category}
         </h1>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 justify-items-center hover:border-blue-400 dark:hover:border-blue-400">
-          {products.slice(0, visible).map((item) => (
+          {filteredProducts.slice(0, visible).map((item) => (
             <Item
-              key={item.id} // Ensure a unique key, preferably the product ID
+              key={item.id}
               id={item.id}
               category={category}
               name={item.name}
@@ -52,12 +54,12 @@ const ShopCategory = ({ category }) => {
         <div className="text-center my-4 flex justify-center space-x-4">
           <button
             className={`text-lg font-medium py-2 px-6 rounded-md shadow-md ${
-              visible < products.length
+              visible < filteredProducts.length
                 ? "bg-blue-500 hover:bg-blue-600 text-white"
                 : "bg-gray-800 text-gray-300 cursor-not-allowed"
             }`}
             onClick={loadMore}
-            disabled={visible >= products.length}
+            disabled={visible >= filteredProducts.length}
           >
             Show More
           </button>
