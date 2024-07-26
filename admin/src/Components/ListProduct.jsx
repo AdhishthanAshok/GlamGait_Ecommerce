@@ -62,7 +62,7 @@ const ListProduct = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 dark:bg-gray-800 dark:text-gray-50 h-screen">
+    <div className="container mx-auto p-4 dark:bg-gray-800 dark:text-gray-50 h-screen  overflow-x-hidden overflow-y: auto">
       <ToastContainer />
       <h1 className="text-2xl font-bold mb-4 text-center">All Products List</h1>
       <div className="overflow-x-auto ">
