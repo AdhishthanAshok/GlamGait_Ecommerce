@@ -6,7 +6,7 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div>
+    <div className="dark:bg-gray-800">
       <Navbar />
       <Admin />
     </div>
