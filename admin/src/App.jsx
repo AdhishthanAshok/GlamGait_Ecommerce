@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "./Components/Navbar.jsx";
 import Admin from "./Components/Admin.jsx";
+import Footer from "./Components/Footer.jsx";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -9,6 +10,7 @@ function App() {
     <div className="dark:bg-gray-800">
       <Navbar />
       <Admin />
+      <Footer />
     </div>
   );
 }
