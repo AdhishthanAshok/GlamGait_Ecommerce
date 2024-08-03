@@ -113,7 +113,7 @@ const Footer = () => {
         <div className="sm:flex sm:items-center sm:justify-between">
           <p className="mr-5 text-gray-800 dark:text-gray-50 text-xs font-bold">
             {" "}
-            Created by Adhishthan Ashok
+            Created by Adhishthan Ashok and Aarti
           </p>
           <div className="flex mt-4 sm:justify-center sm:mt-0">
             <a
