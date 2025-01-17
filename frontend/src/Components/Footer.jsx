@@ -111,10 +111,10 @@ const Footer = () => {
         </div>
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <div className="sm:flex sm:items-center sm:justify-between">
-          <p className="mr-5 text-gray-800 dark:text-gray-50 text-xs font-bold">
+          {/* <p className="mr-5 text-gray-800 dark:text-gray-50 text-xs font-bold">
             {" "}
             Created by Adhishthan Ashok and Aarti
-          </p>
+          </p> */}
           <div className="flex mt-4 sm:justify-center sm:mt-0">
             <a
               href="https://leetcode.com/u/adhishthanashok/"

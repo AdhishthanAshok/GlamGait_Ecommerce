@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
-const path = require("path");
 const cloudinary = require("cloudinary").v2;
 const cors = require("cors");
 require("dotenv").config();
@@ -21,6 +20,7 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization", "auth-token"],
   })
 );
+
 app.use(express.json());
 
 // Database Connection with MongoDB
@@ -178,6 +178,7 @@ app.post("/signup", async (req, res) => {
       errors: "Existing user found with same Email id",
     });
   }
+  
   let cart = {};
   for (let i = 0; i < 100; i++) {
     cart[i] = 0;
