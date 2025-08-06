@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { BellIcon, XMarkIcon, Bars3Icon } from "@heroicons/react/24/outline";
+import { XMarkIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import logo_img_dark from "./assets/logo_dark.jpg";
 import logo_img_light from "./assets/logo_light.png";
 import profile_img from "./assets/profile_icon.png";
@@ -24,7 +24,6 @@ function classNames(...classes) {
 export default function Navbar() {
   const [menu, setMenu] = useState("Shop");
   const [darkMode, setDarkMode] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [open, setOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
