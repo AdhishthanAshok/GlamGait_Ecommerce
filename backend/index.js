@@ -144,7 +144,7 @@ app.post("/removeproduct", async (req, res) => {
 // Create API for getting all products
 
 app.get("/allproducts", async (req, res) => {
-  let products = await Product.find({});
+  let products = await Product.find({}).sort({ date: -1 });;
   res.send(products);
 });
 
@@ -178,7 +178,7 @@ app.post("/signup", async (req, res) => {
       errors: "Existing user found with same Email id",
     });
   }
-  
+
   let cart = {};
   for (let i = 0; i < 100; i++) {
     cart[i] = 0;
