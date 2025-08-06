@@ -34,7 +34,7 @@ const AddProduct = () => {
     try {
       // Upload image first
       const uploadResponse = await fetch(
-        `https://glamgait-ecommerce-backend.vercel.app/upload`,
+        `https://glamgait-ecommerce-backend.onrender.com/upload`,
         {
           method: "POST",
           body: formData,
@@ -53,7 +53,7 @@ const AddProduct = () => {
 
         // Send product details to add to the database
         const addProductResponse = await fetch(
-          `https://glamgait-ecommerce-backend.vercel.app/addproduct`,
+          `https://glamgait-ecommerce-backend.onrender.com/addproduct`,
           {
             method: "POST",
             headers: {

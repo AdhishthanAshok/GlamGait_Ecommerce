@@ -8,7 +8,7 @@ const ShopCategory = ({ category }) => {
   const fetchProducts = async () => {
     try {
       const response = await fetch(
-        "https://glamgait-ecommerce-backend.vercel.app/allproducts"
+        "https://glamgait-ecommerce-backend.onrender.com/allproducts"
       );
       const data = await response.json();
       setProducts(data);
@@ -55,22 +55,20 @@ const ShopCategory = ({ category }) => {
         </div>
         <div className="text-center my-4 flex justify-center space-x-4">
           <button
-            className={`text-lg font-medium py-2 px-6 rounded-md shadow-md ${
-              visible < filteredProducts.length
+            className={`text-lg font-medium py-2 px-6 rounded-md shadow-md ${visible < filteredProducts.length
                 ? "bg-blue-500 hover:bg-blue-600 text-white"
                 : "bg-gray-800 text-gray-300 cursor-not-allowed"
-            }`}
+              }`}
             onClick={loadMore}
             disabled={visible >= filteredProducts.length}
           >
             Show More
           </button>
           <button
-            className={`text-lg font-medium py-2 px-6 rounded-md shadow-md ${
-              visible > 8
+            className={`text-lg font-medium py-2 px-6 rounded-md shadow-md ${visible > 8
                 ? "bg-red-500 hover:bg-red-600 text-white"
                 : "bg-gray-500 text-gray-300 cursor-not-allowed"
-            }`}
+              }`}
             onClick={showLess}
             disabled={visible <= 8}
           >

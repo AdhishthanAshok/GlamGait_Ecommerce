@@ -9,14 +9,14 @@ const ShopContextProvider = (props) => {
   const fetchProducts = async () => {
     try {
       const response = await fetch(
-        "https://glamgait-ecommerce-backend.vercel.app/allproducts"
+        "https://glamgait-ecommerce-backend.onrender.com/allproducts"
       );
       const data = await response.json();
       setAllProducts(data);
       setCartItems(getDefaultCart(data.length)); // Initialize cart based on number of products
 
       if (localStorage.getItem("auth-token")) {
-        fetch("https://glamgait-ecommerce-backend.vercel.app/getcart", {
+        fetch("https://glamgait-ecommerce-backend.onrender.com/getcart", {
           method: "POST",
           headers: {
             Accept: "application/form-data",
@@ -52,7 +52,7 @@ const ShopContextProvider = (props) => {
         [itemId]: (prev[itemId] || 0) + 1, // Default to 0 if undefined
       };
       if (localStorage.getItem("auth-token")) {
-        fetch("https://glamgait-ecommerce-backend.vercel.app/addtocart", {
+        fetch("https://glamgait-ecommerce-backend.onrender.com/addtocart", {
           method: "POST",
           headers: {
             Accept: "application/form-data",
@@ -71,7 +71,7 @@ const ShopContextProvider = (props) => {
   const removeFromCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
     if (localStorage.getItem("auth-token")) {
-      fetch("https://glamgait-ecommerce-backend.vercel.app/removefromcart", {
+      fetch("https://glamgait-ecommerce-backend.onrender.com/removefromcart", {
         method: "POST",
         headers: {
           Accept: "application/form-data",
@@ -91,7 +91,7 @@ const ShopContextProvider = (props) => {
 
       if (localStorage.getItem("auth-token")) {
         fetch(
-          "https://glamgait-ecommerce-backend.vercel.app/removeentireitem",
+          "https://glamgait-ecommerce-backend.onrender.com/removeentireitem",
           {
             method: "POST",
             headers: {

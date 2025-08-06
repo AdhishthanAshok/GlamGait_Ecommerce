@@ -111,7 +111,7 @@ Welcome to GlamGait_Ecommerce! This project is a modern and responsive ecommerce
 ## Links
 
 - **Frontend**: [GlamGait Shopping Frontend](https://glamgait-shopping.vercel.app)
-- **Backend**: [GlamGait Shopping Backend](https://glamgait-ecommerce-backend.vercel.app)
+- **Backend**: [GlamGait Shopping Backend](https://glamgait-ecommerce-backend.onrender.com)
 - **Admin Portal**: [GlamGait Admin Panel](https://glamgait-admin.vercel.app/)
 
 ## Contributing

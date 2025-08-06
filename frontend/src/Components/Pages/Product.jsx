@@ -11,7 +11,7 @@ const Product = () => {
   const fetchProduct = async () => {
     try {
       const response = await fetch(
-        `https://glamgait-ecommerce-backend.vercel.app/allproducts`
+        `https://glamgait-ecommerce-backend.onrender.com/allproducts`
       );
       const data = await response.json();
       const foundProduct = data.find((item) => item.id === Number(productId));
@@ -64,11 +64,10 @@ const Product = () => {
             </div>
             <div className="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
               <button
-                className={`text-gray-50 dark:text-gray-50 mt-4 sm:mt-0 font-medium rounded-lg text-sm px-5 py-2.5 flex items-center justify-center ${
-                  addedToCart
+                className={`text-gray-50 dark:text-gray-50 mt-4 sm:mt-0 font-medium rounded-lg text-sm px-5 py-2.5 flex items-center justify-center ${addedToCart
                     ? "bg-gray-400"
                     : "bg-green-500 hover:bg-green-600"
-                }`}
+                  }`}
                 onClick={handleAddToCart}
                 disabled={addedToCart}
               >

@@ -7,7 +7,7 @@ const Popular = () => {
   const fetchProducts = async () => {
     try {
       const response = await fetch(
-        "https://glamgait-ecommerce-backend.vercel.app/allproducts"
+        "https://glamgait-ecommerce-backend.onrender.com/allproducts"
       );
       const data = await response.json();
       setAllProducts(data);
